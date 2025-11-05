@@ -6,7 +6,7 @@ const concertRoutes = require("./routes/concertRoute");
 
 const app = express();
 const port = process.env.PORT || 3001;
-
+//allow cors
 app.use(cors({
   origin: "*",
   methods: ["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
