@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: concert-service
+  namespace: microservices
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: concert-service
+  template:
+    metadata:
+      labels:
+        app: concert-service
+    spec:
+      containers:
+        - name: concert-service
+          image: kennyadg/concert-service:latest
+          ports:
+            - containerPort: 3001
+          env:
+            - name: DATABASE_URL
+              value: "postgres://admin:admin@10.241.222.216:30432/ticketapp"
+            - name: JWT_SECRET
+              value: "supersecret"
+            - name: PORT
+              value: "3001"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
